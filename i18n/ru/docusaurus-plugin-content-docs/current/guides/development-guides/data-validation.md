@@ -5,11 +5,13 @@ title: Data Validation
 
 # Data Validation
 
-Avalonia offers different data validation options. In this section we will show you how you can validate the `Properties` of your `ViewModel` and how you can style the displayed error message.
+Avalonia offers different data validation options. In this section we will show you how you can validate the
+`Properties` of your `ViewModel` and how you can style the displayed error message.
 
 ## Validating a property
 
-Avalonia uses [`DataValidationPlugins`](http://reference.avaloniaui.net/api/Avalonia.Data.Core.Plugins/IDataValidationPlugin/) to validate the `Properties` you bound to. Out of the box Avalonia provide these three validation plugins:
+Avalonia uses [`DataValidationPlugins`](http://reference.avaloniaui.net/api/Avalonia.Data.Core.Plugins/IDataValidationPlugin/) to validate the `Properties` you bound to. Out of the box Avalonia
+provide these three validation plugins:
 
 * [DataAnnotations - ValidationPlugin](data-validation.md#dataannotations---validationplugin)
 * [INotifyDataErrorInfo - ValidationPlugin](data-validation.md#inotifydataerrorinfo---validationplugin)
@@ -17,7 +19,8 @@ Avalonia uses [`DataValidationPlugins`](http://reference.avaloniaui.net/api/Aval
 
 ### DataAnnotations - ValidationPlugin
 
-You can decorate the `Properties` of your `ViewModel` with different [`Validation-Attributes`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.validationattribute). You can use the build-in ones, use the [`CustomValidationAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.customvalidationattribute) or create your own by derive from `ValidationAttribute`.
+You can decorate the `Properties` of your `ViewModel` with different [`Validation-Attributes`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.validationattribute). You can use the
+build-in ones, use the [`CustomValidationAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.customvalidationattribute) or create your own by derive from `ValidationAttribute`.
 
 **Sample: The property EMail is required and must be a valid e-mail-address**
 
@@ -33,10 +36,14 @@ public string? EMail
 
 ### INotifyDataErrorInfo - ValidationPlugin
 
-Avalonia also supports validation of classes that implement [`INotifyDataErrorInfo`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo). Several `MVVM`-libraries are using this interface for their data validation, for example the [Microsoft.Toolkit.Mvvm](https://learn.microsoft.com/en-us/windows/communitytoolkit/mvvm/observablevalidator)-package and the [`ReactiveUI.Validation`](https://github.com/reactiveui/ReactiveUI.Validation#inotifydataerrorinfo-support)-package. For usage instructions please visit the documentation of the `MVVM`-package of your choice.
+Avalonia also supports validation of classes that implement [`INotifyDataErrorInfo`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifydataerrorinfo). Several `MVVM`-libraries
+are using this interface for their data validation, for example the [CommunityToolkit.Mvvm](https://learn.microsoft.com/en-us/windows/communitytoolkit/mvvm/observablevalidator)-package and
+the [`ReactiveUI.Validation`](https://github.com/reactiveui/ReactiveUI.Validation#inotifydataerrorinfo-support)-package. For usage instructions please visit the documentation of the `MVVM`-package
+of your choice.
 
 :::info
-Some libraries like the `Microsoft.Toolkit.Mvvm` use `DataAnnotations` for their validation. This may result in conflicts with the [DataAnnotations - ValidationPlugin](data-validation.md#dataannotations---validationplugin). Please see [Manage ValidationPlugins](data-validation.md#manage-validationplugins) how to solve this issue.
+Some libraries like `CommunityToolkit.Mvvm` use `DataAnnotations` for their validation. This may result in conflicts
+with the [DataAnnotations - ValidationPlugin](data-validation.md#dataannotations---validationplugin). Please see [Manage ValidationPlugins](data-validation.md#manage-validationplugins) how to solve this issue.
 :::
 
 ### Exception - ValidationPlugin
@@ -73,7 +80,10 @@ Exceptions inside the getter of your property are not allowed and will result in
 
 ## Customize the appearance of the validation message
 
-To display the validation messages, Avalonia has a control called [`DataValidationErrors`](http://reference.avaloniaui.net/api/Avalonia.Controls/DataValidationErrors/). This control is typically placed inside the `ControlTemplate` of all `Controls` that supports data validation, like `TextBox`, `Slider` and other. You can create your own `Style` of the `DataValidationErrors`-control in order to customize the representation of the error messages.
+To display the validation messages, Avalonia has a control called [`DataValidationErrors`](http://reference.avaloniaui.net/api/Avalonia.Controls/DataValidationErrors/). This control is
+typically placed inside the `ControlTemplate` of all `Controls` that supports data validation, like `TextBox`, `Slider`
+and other. You can create your own `Style` of the `DataValidationErrors`-control in order to customize the
+representation of the error messages.
 
 **Example Style for DataValidationErrors**
 
@@ -99,7 +109,7 @@ To display the validation messages, Avalonia has a control called [`DataValidati
     </ControlTemplate>
   </Setter>
   <Setter Property="ErrorTemplate">
-    <DataTemplate>
+    <DataTemplate x:DataType="{x:Type x:Object}">
       <Canvas Width="14" Height="14" Margin="4 0 1 0" 
               Background="Transparent">
         <Canvas.Styles>
@@ -126,7 +136,9 @@ To display the validation messages, Avalonia has a control called [`DataValidati
 
 ## Manage ValidationPlugins
 
-if needed to, you can enable or disable a specific `ValidationPlugin` in your App. This can be useful if for example your MVVM-framework uses `DataAnnotations` to validate the property via `INotifyDataErrorInfo`. In that case you would see the message twice. Use the `BindingPlugins.DataValidators`-collection to add or remove a specific `ValidationPlugin`.
+if needed to, you can enable or disable a specific `ValidationPlugin` in your App. This can be useful if for example
+your MVVM-framework uses `DataAnnotations` to validate the property via `INotifyDataErrorInfo`. In that case you would
+see the message twice. Use the `BindingPlugins.DataValidators`-collection to add or remove a specific `ValidationPlugin`.
 
 **Example: Remove the DataAnnotations validator**
 
